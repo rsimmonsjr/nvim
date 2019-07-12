@@ -24,6 +24,8 @@ set number
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
 colo gruvbox
+highlight Comment cterm=italic
+highlight link SpecialComment GruvboxFg4
 
 " ---------- Gruvbox
 
