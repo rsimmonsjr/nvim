@@ -27,6 +27,9 @@ colo gruvbox
 highlight Comment cterm=italic
 highlight link SpecialComment GruvboxFg4
 
+autocmd FileType rust setlocal colorcolumn=100
+autocmd FileType elixir setlocal colorcolumn=100
+
 " ---------- Gruvbox
 
 let g:gruvbox_contrast_dark='dark'
