@@ -11,6 +11,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 call plug#end()
 
@@ -22,13 +23,16 @@ set background=dark
 set tabstop=4
 set number
 filetype plugin on
-set omnifunc=syntaxcomplete#Complete
 colo gruvbox
 highlight Comment cterm=italic
 highlight link SpecialComment GruvboxFg4
 
+" Stop it from autoinserting. Now <C-n> to complete and <Enter> to select. 
+set completeopt=menu,menuone,noinsert  
+
+" Set margin marker per source file
 autocmd FileType rust setlocal colorcolumn=100
-autocmd FileType elixir setlocal colorcolumn=100
+autocmd FileType elixir setlocal colorcolumn=98
 
 " ---------- Gruvbox
 
@@ -79,17 +83,29 @@ noremap <silent> <leader>gb :Gblame<CR>
 " ---------- ALE
 let g:ale_linters = {
 \ 'elixir': ['elixir-ls'],
-\ 'rust': ['rls']
+\ 'rust': ['rls'],
+\ 'yaml': ['prettier'],
+\ 'yml': ['prettier']
 \}
 
 let g:ale_fixers = {
 \ 'elixir': ['mix_format'],
-\ 'rust': ['rustfmt']
+\ 'rust': ['rustfmt'],
+\ 'yaml': ['prettier'],
+\ 'yml': ['prettier']
 \}
 
 let g:ale_elixir_elixir_ls_release='~/dev/elixir-ls/rel'
 let g:ale_lint_on_save = '1'
 let g:ale_fix_on_save = '1'
+
+" ---------- Deoplete
+
+let g:deoplete#enable_at_startup = 1
+
+call deoplete#custom#option('sources', {
+\ '_': ['ale'],
+\})
 
 " ---------- Key Mappings
 
@@ -101,9 +117,8 @@ noremap <silent> <M--> <C-w>5-<CR>
 noremap <silent> <M-=> <C-w>5+<CR>
 noremap <silent> <leader>ss :split<CR>
 noremap <silent> <leader>vv :vsplit<CR>
-
-noremap <silent> <leader>n :NERDTreeToggle<CR>
-
+noremap <silent> <leader>nt :NERDTreeToggle<CR>
+noremap <silent> <leader>m :Marks<CR> 
 noremap <silent> <leader>b :Buffers<CR> 
 noremap <silent> <leader>l :BLines<CR> 
 noremap <silent> <leader>km :Maps<CR> 
@@ -113,8 +128,7 @@ noremap <silent> <leader>gf :GFiles<CR>
 noremap <silent> <leader>gg :GGrep<CR> 
 noremap <silent> <leader>gc :BCommits<CR> 
 noremap <silent> <leader>gb :Gblame<CR> 
-
-imap <C-Space> <Plug>(ale_complete)
+inoremap <expr> <C-Space> deoplete#mappings#manual_complete()
 noremap <silent> <leader>ai :ALEDetail<CR>
 noremap <silent> <leader>ah :ALEHover<CR>
 noremap <silent> <leader>ax :ALEDetail<CR>
@@ -124,5 +138,6 @@ noremap <silent> <leader>at :ALEGoToTypeDefinition<CR>
 noremap <leader>as  :ALESymbolSearch<Space>
 noremap <leader>an  :ALENext<CR> 
 noremap <leader>ap  :ALEPrevious<CR> 
+noremap <leader>cm :delmarks A-Za-z0-9<CR>
 
 
