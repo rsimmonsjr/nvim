@@ -12,6 +12,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
@@ -27,7 +28,7 @@ colo gruvbox
 highlight Comment cterm=italic
 highlight link SpecialComment GruvboxFg4
 
-" Stop it from autoinserting. Now <C-n> to complete and <Enter> to select. 
+" Stop it from auto-inserting. Now <C-n> to complete and <Enter> to select. 
 set completeopt=menu,menuone,noinsert  
 
 " Set margin marker per source file
@@ -115,6 +116,9 @@ noremap <silent> <M-Up> <C-W><C-K>
 noremap <silent> <M-Down> <C-W><C-J>
 noremap <silent> <M--> <C-w>5-<CR>
 noremap <silent> <M-=> <C-w>5+<CR>
+noremap <silent> <M-=> <C-w>5+<CR>
+noremap <silent> <leader>se :setlocal spell spelllang=en_us<CR>
+noremap <silent> <leader>sd :set nospell<CR>
 noremap <silent> <leader>ss :split<CR>
 noremap <silent> <leader>vv :vsplit<CR>
 noremap <silent> <leader>nt :NERDTreeToggle<CR>
