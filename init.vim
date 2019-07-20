@@ -27,6 +27,7 @@ filetype plugin on
 colo gruvbox
 highlight Comment cterm=italic
 highlight link SpecialComment GruvboxFg4
+set spellcapcheck=0 
 
 " Stop it from auto-inserting. Now <C-n> to complete and <Enter> to select. 
 set completeopt=menu,menuone,noinsert  
