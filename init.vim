@@ -80,8 +80,6 @@ command! -bang -nargs=? -complete=dir Files
 
 " ---------- Fugitive
 
-noremap <silent> <leader>gb :Gblame<CR> 
-
 " ---------- ALE
 let g:ale_linters = {
 \ 'elixir': ['elixir-ls'],
@@ -122,27 +120,26 @@ noremap <silent> <leader>se :setlocal spell spelllang=en_us<CR>
 noremap <silent> <leader>sd :set nospell<CR>
 noremap <silent> <leader>ss :split<CR>
 noremap <silent> <leader>vv :vsplit<CR>
-noremap <silent> <leader>nt :NERDTreeToggle<CR>
+noremap <silent> <M-t> :NERDTreeToggle<CR>
 noremap <silent> <leader>m :Marks<CR> 
 noremap <silent> <leader>b :Buffers<CR> 
 noremap <silent> <leader>l :BLines<CR> 
 noremap <silent> <leader>km :Maps<CR> 
 noremap <silent> <leader>ff :Files<CR> 
 noremap <silent> <leader>rg :Rg<CR> 
+noremap <silent> <leader>gb :Gblame<CR> 
 noremap <silent> <leader>gf :GFiles<CR> 
 noremap <silent> <leader>gg :GGrep<CR> 
 noremap <silent> <leader>gc :BCommits<CR> 
 noremap <silent> <leader>gb :Gblame<CR> 
-inoremap <expr> <C-Space> deoplete#mappings#manual_complete()
-noremap <silent> <leader>ai :ALEDetail<CR>
-noremap <silent> <leader>ah :ALEHover<CR>
-noremap <silent> <leader>ax :ALEDetail<CR>
-noremap <silent> <leader>ar :ALEFindReferences<CR> 
-noremap <silent> <leader>ad :ALEGoToDefinition<CR> 
-noremap <silent> <leader>at :ALEGoToTypeDefinition<CR> 
-noremap <leader>as  :ALESymbolSearch<Space>
-noremap <leader>an  :ALENext<CR> 
-noremap <leader>ap  :ALEPrevious<CR> 
+noremap <silent> <leader>i :ALEDetail<CR>
+noremap <silent> <leader>h :ALEHover<CR>
+noremap <silent> <leader>r :ALEFindReferences<CR> 
+noremap <silent> <leader>d :ALEGoToDefinition<CR> 
+noremap <silent> <leader>t :ALEGoToTypeDefinition<CR> 
+noremap <leader>s  :ALESymbolSearch<Space>
+noremap <leader>n  :ALENext<CR> 
+noremap <leader>p  :ALEPrevious<CR> 
 noremap <leader>cm :delmarks A-Za-z0-9<CR>
 
 
