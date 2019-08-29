@@ -33,6 +33,7 @@ set spellcapcheck=0
 set completeopt=menu,menuone,noinsert  
 
 " Set margin marker per source file
+autocmd FileType markdown setlocal colorcolumn=100
 autocmd FileType rust setlocal colorcolumn=100
 autocmd FileType elixir setlocal colorcolumn=98
 
@@ -114,8 +115,9 @@ noremap <silent> <M-Left> <C-W><C-H>
 noremap <silent> <M-Up> <C-W><C-K>
 noremap <silent> <M-Down> <C-W><C-J>
 noremap <silent> <M--> <C-w>5-<CR>
+noremap <silent> <M->> <C-w>5><CR>
 noremap <silent> <M-=> <C-w>5+<CR>
-noremap <silent> <M-=> <C-w>5+<CR>
+noremap <silent> <M-<> <C-w>5<<CR>
 noremap <silent> <leader>se :setlocal spell spelllang=en_us<CR>
 noremap <silent> <leader>sd :set nospell<CR>
 noremap <silent> <leader>ss :split<CR>
