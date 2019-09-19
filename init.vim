@@ -28,6 +28,8 @@ colo gruvbox
 highlight Comment cterm=italic
 highlight link SpecialComment GruvboxFg4
 set spellcapcheck=0 
+:set clipboard=unnamedplus "yank, etc always to register +
+set diffopt=vertical "prefer vertical split in diffs
 
 " Stop it from auto-inserting. Now <C-n> to complete and <Enter> to select. 
 set completeopt=menu,menuone,noinsert  
@@ -124,7 +126,9 @@ noremap <silent> <leader>ss :split<CR>
 noremap <silent> <leader>vv :vsplit<CR>
 noremap <silent> <M-t> :NERDTreeToggle<CR>
 noremap <silent> <leader>m :Marks<CR> 
+noremap <silent> <M-b> :Buffers<CR> 
 noremap <silent> <leader>b :Buffers<CR> 
+noremap <silent> <C-l> :BLines<CR> 
 noremap <silent> <leader>l :BLines<CR> 
 noremap <silent> <leader>km :Maps<CR> 
 noremap <silent> <leader>ff :Files<CR> 
