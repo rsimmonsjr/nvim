@@ -9,10 +9,11 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'w0rp/ale'
 Plug 'tpope/vim-fugitive'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'cespare/vim-toml'
+Plug 'elixir-editors/vim-elixir'
+Plug 'tpope/vim-endwise'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 
@@ -30,6 +31,7 @@ highlight link SpecialComment GruvboxFg4
 set spellcapcheck=0 
 :set clipboard=unnamedplus "yank, etc always to register +
 set diffopt=vertical "prefer vertical split in diffs
+set signcolumn=yes
 
 " Stop it from auto-inserting. Now <C-n> to complete and <Enter> to select. 
 set completeopt=menu,menuone,noinsert  
@@ -83,34 +85,7 @@ command! -bang -nargs=? -complete=dir Files
 
 " ---------- Fugitive
 
-" ---------- ALE
-let g:ale_linters = {
-\ 'elixir': ['elixir-ls'],
-\ 'rust': ['rls'],
-\ 'yaml': ['prettier'],
-\ 'yml': ['prettier']
-\}
-
-let g:ale_fixers = {
-\ 'elixir': ['mix_format'],
-\ 'rust': ['rustfmt'],
-\ 'yaml': ['prettier'],
-\ 'yml': ['prettier']
-\}
-
-let g:ale_elixir_elixir_ls_release='~/dev/elixir-ls/rel'
-let g:ale_lint_on_save = '1'
-let g:ale_fix_on_save = '1'
-
-" ---------- Deoplete
-
-let g:deoplete#enable_at_startup = 1
-
-call deoplete#custom#option('sources', {
-\ '_': ['ale'],
-\})
-
-" ---------- Key Mappings
+" ---------- General Key Mappings
 
 noremap <silent> <M-Right> <C-W><C-L>
 noremap <silent> <M-Left> <C-W><C-H>
@@ -120,17 +95,17 @@ noremap <silent> <M--> <C-w>5-<CR>
 noremap <silent> <M->> <C-w>5><CR>
 noremap <silent> <M-=> <C-w>5+<CR>
 noremap <silent> <M-<> <C-w>5<<CR>
+noremap <silent> <F4> :set hlsearch! hlsearch?<CR>
+noremap <silent> <M-h> :noh<CR>
 noremap <silent> <leader>se :setlocal spell spelllang=en_us<CR>
 noremap <silent> <leader>sd :set nospell<CR>
 noremap <silent> <leader>ss :split<CR>
 noremap <silent> <leader>vv :vsplit<CR>
 noremap <silent> <M-t> :NERDTreeToggle<CR>
-noremap <silent> <leader>m :Marks<CR> 
+noremap <silent> <M-m> :Marks<CR> 
 noremap <silent> <M-b> :Buffers<CR> 
-noremap <silent> <leader>b :Buffers<CR> 
-noremap <silent> <C-l> :BLines<CR> 
-noremap <silent> <leader>l :BLines<CR> 
-noremap <silent> <leader>km :Maps<CR> 
+noremap <silent> <M-l> :BLines<CR> 
+noremap <silent> <M-k> :Maps<CR> 
 noremap <silent> <leader>ff :Files<CR> 
 noremap <silent> <leader>rg :Rg<CR> 
 noremap <silent> <leader>gb :Gblame<CR> 
@@ -138,14 +113,26 @@ noremap <silent> <leader>gf :GFiles<CR>
 noremap <silent> <leader>gg :GGrep<CR> 
 noremap <silent> <leader>gc :BCommits<CR> 
 noremap <silent> <leader>gb :Gblame<CR> 
-noremap <silent> <leader>i :ALEDetail<CR>
-noremap <silent> <leader>h :ALEHover<CR>
-noremap <silent> <leader>r :ALEFindReferences<CR> 
-noremap <silent> <leader>d :ALEGoToDefinition<CR> 
-noremap <silent> <leader>t :ALEGoToTypeDefinition<CR> 
-noremap <leader>s  :ALESymbolSearch<Space>
-noremap <leader>n  :ALENext<CR> 
-noremap <leader>p  :ALEPrevious<CR> 
-noremap <leader>cm :delmarks A-Za-z0-9<CR>
+noremap <leader>xm :delmarks A-Za-z0-9<CR>
+noremap <silent> <M-q> :bw<cr>
 
+" ---------- Coc Key Mappings
+
+" Format the whole file
+nmap <silent> <M-f> <Plug>(coc-format) 
+nmap <silent> <M-o> :CocList outline<cr>
+nmap <silent> <M-d> :CocList diagnostics<cr>
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> gp <Plug>(coc-diagnostic-prev)
+nmap <silent> gn <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
