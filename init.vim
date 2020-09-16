@@ -47,6 +47,10 @@ let g:gruvbox_contrast_dark='dark'
 let g:gruvbox_italicize_strings='1'
 let g:gruvbox_italicize_comments='1'
 
+" ---------- NERDTree
+
+let NERDTreeShowHidden=1
+
 " ---------- FZF
 
 let g:fzf_layout = { 'down': '~25%' }
@@ -106,6 +110,7 @@ noremap <silent> <M-m> :Marks<CR>
 noremap <silent> <M-b> :Buffers<CR> 
 noremap <silent> <M-l> :BLines<CR> 
 noremap <silent> <M-k> :Maps<CR> 
+noremap <silent> <leader>nf :NERDTreeFind<CR> 
 noremap <silent> <leader>ff :Files<CR> 
 noremap <silent> <leader>rg :Rg<CR> 
 noremap <silent> <leader>gb :Gblame<CR> 
@@ -115,13 +120,15 @@ noremap <silent> <leader>gc :BCommits<CR>
 noremap <silent> <leader>gb :Gblame<CR> 
 noremap <leader>xm :delmarks A-Za-z0-9<CR>
 noremap <silent> <M-q> :bw<cr>
+noremap <silent> <leader>ntf :NERDTreeFind<CR> 
 
 " ---------- Coc Key Mappings
 
-" Format the whole file
-nmap <silent> <M-f> <Plug>(coc-format) 
+nmap <silent> <M-f> <Plug>(coc-format)
+nmap <silent> <M-F> <Plug>(coc-format-selected)
 nmap <silent> <M-o> :CocList outline<cr>
 nmap <silent> <M-d> :CocList diagnostics<cr>
+nmap <silent> <M-s> :CocList -I symbols<cr>
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -135,4 +142,16 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Tab Completion in coc-nvim
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
