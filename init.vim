@@ -38,8 +38,11 @@ set completeopt=menu,menuone,noinsert
 
 " Set margin marker per source file
 autocmd FileType markdown setlocal colorcolumn=100
+autocmd FileType markdown setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType rust setlocal colorcolumn=100
+autocmd FileType rust setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType elixir setlocal colorcolumn=98
+autocmd FileType elixir setlocal tabstop=2 shiftwidth=2 expandtab
 
 " ---------- Gruvbox
 
@@ -111,10 +114,13 @@ noremap <silent> <M-b> :Buffers<CR>
 noremap <silent> <M-l> :BLines<CR> 
 noremap <silent> <M-k> :Maps<CR> 
 noremap <silent> <leader>nf :NERDTreeFind<CR> 
-noremap <silent> <leader>ff :Files<CR> 
+noremap <silent> <M-n> :NERDTreeFind<CR> 
+" noremap <silent> <leader>ff :Files<CR> 
+noremap <silent> <M-f> :Files<CR> 
 noremap <silent> <leader>rg :Rg<CR> 
-noremap <silent> <leader>gb :Gblame<CR> 
+" noremap <silent> <leader>gb :Gblame<CR> 
 noremap <silent> <leader>gf :GFiles<CR> 
+noremap <silent> <M-g> :GFiles<CR> 
 noremap <silent> <leader>gg :GGrep<CR> 
 noremap <silent> <leader>gc :BCommits<CR> 
 noremap <silent> <leader>gb :Gblame<CR> 
@@ -124,8 +130,9 @@ noremap <silent> <leader>ntf :NERDTreeFind<CR>
 
 " ---------- Coc Key Mappings
 
-nmap <silent> <M-f> <Plug>(coc-format)
-nmap <silent> <M-F> <Plug>(coc-format-selected)
+nmap <silent> <M-R> <Plug>call CocActionAsync('rename')<CR>
+nmap <silent> <M-F> <Plug>(coc-format)
+nmap <silent> <M-V> <Plug>(coc-format-selected)
 nmap <silent> <M-o> :CocList outline<cr>
 nmap <silent> <M-d> :CocList diagnostics<cr>
 nmap <silent> <M-s> :CocList -I symbols<cr>
@@ -155,3 +162,5 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+" Strip trailing whitespace on save.
+autocmd BufWritePre * :%s/\s\+$//e
