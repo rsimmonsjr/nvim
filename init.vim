@@ -28,13 +28,13 @@ filetype plugin on
 colo gruvbox
 highlight Comment cterm=italic
 highlight link SpecialComment GruvboxFg4
-set spellcapcheck=0 
+set spellcapcheck=0
 :set clipboard=unnamedplus "yank, etc always to register +
 set diffopt=vertical "prefer vertical split in diffs
 set signcolumn=yes
 
-" Stop it from auto-inserting. Now <C-n> to complete and <Enter> to select. 
-set completeopt=menu,menuone,noinsert  
+" Stop it from auto-inserting. Now <C-n> to complete and <Enter> to select.
+set completeopt=menu,menuone,noinsert
 
 " Set margin marker per source file
 autocmd FileType markdown setlocal colorcolumn=100
@@ -109,24 +109,24 @@ noremap <silent> <leader>sd :set nospell<CR>
 noremap <silent> <leader>ss :split<CR>
 noremap <silent> <leader>vv :vsplit<CR>
 noremap <silent> <M-t> :NERDTreeToggle<CR>
-noremap <silent> <M-m> :Marks<CR> 
-noremap <silent> <M-b> :Buffers<CR> 
-noremap <silent> <M-l> :BLines<CR> 
-noremap <silent> <M-k> :Maps<CR> 
-noremap <silent> <leader>nf :NERDTreeFind<CR> 
-noremap <silent> <M-n> :NERDTreeFind<CR> 
-" noremap <silent> <leader>ff :Files<CR> 
-noremap <silent> <M-f> :Files<CR> 
-noremap <silent> <leader>rg :Rg<CR> 
-" noremap <silent> <leader>gb :Gblame<CR> 
-noremap <silent> <leader>gf :GFiles<CR> 
-noremap <silent> <M-g> :GFiles<CR> 
-noremap <silent> <leader>gg :GGrep<CR> 
-noremap <silent> <leader>gc :BCommits<CR> 
-noremap <silent> <leader>gb :Gblame<CR> 
+noremap <silent> <M-m> :Marks<CR>
+noremap <silent> <M-b> :Buffers<CR>
+noremap <silent> <M-l> :BLines<CR>
+noremap <silent> <M-k> :Maps<CR>
+noremap <silent> <leader>nf :NERDTreeFind<CR>
+noremap <silent> <M-n> :NERDTreeFind<CR>
+" noremap <silent> <leader>ff :Files<CR>
+noremap <silent> <M-f> :Files<CR>
+noremap <silent> <leader>rg :Rg<CR>
+" noremap <silent> <leader>gb :Gblame<CR>
+noremap <silent> <leader>gf :GFiles<CR>
+noremap <silent> <M-g> :GFiles<CR>
+noremap <silent> <leader>gg :GGrep<CR>
+noremap <silent> <leader>gc :BCommits<CR>
+noremap <silent> <leader>gb :Gblame<CR>
 noremap <leader>xm :delmarks A-Za-z0-9<CR>
 noremap <silent> <M-q> :bw<cr>
-noremap <silent> <leader>ntf :NERDTreeFind<CR> 
+noremap <silent> <leader>ntf :NERDTreeFind<CR>
 
 " ---------- Coc Key Mappings
 
@@ -136,6 +136,10 @@ nmap <silent> <M-V> <Plug>(coc-format-selected)
 nmap <silent> <M-o> :CocList outline<cr>
 nmap <silent> <M-d> :CocList diagnostics<cr>
 nmap <silent> <M-s> :CocList -I symbols<cr>
+
+" Navigating hover diagnostics.
+:nnoremap <nowait><expr> <C-Up> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-Up>"
+:nnoremap <nowait><expr> <C-Down> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-Down>"
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
