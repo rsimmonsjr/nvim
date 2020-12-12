@@ -44,6 +44,20 @@ autocmd FileType rust setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType elixir setlocal colorcolumn=98
 autocmd FileType elixir setlocal tabstop=2 shiftwidth=2 expandtab
 
+" ---------- COC
+let g:coc_global_extensions = [
+						\ 'coc-json',
+						\ 'coc-git',
+						\ 'coc-elixir',
+						\ 'coc-rls',
+						\ 'coc-sql',
+						\ 'coc-rome',
+						\ 'coc-sh',
+						\ 'coc-xml',
+						\ 'coc-yaml',
+						\ 'coc-python',
+						\ ]
+
 " ---------- Gruvbox
 
 let g:gruvbox_contrast_dark='dark'
