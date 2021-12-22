@@ -43,6 +43,7 @@ autocmd FileType rust setlocal colorcolumn=100
 autocmd FileType rust setlocal tabstop=2 shiftwidth=2 expandtab
 autocmd FileType elixir setlocal colorcolumn=98
 autocmd FileType elixir setlocal tabstop=2 shiftwidth=2 expandtab
+autocmd FileType elixir let @i = 'a |> IO.inspect(label: "----->>>>>")'
 
 " ---------- COC
 let g:coc_global_extensions = [
