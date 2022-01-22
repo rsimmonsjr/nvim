@@ -139,7 +139,7 @@ noremap <silent> <M-g> :GFiles<CR>
 noremap <silent> <leader>gg :GGrep<CR>
 noremap <silent> <leader>gc :BCommits<CR>
 noremap <silent> <leader>gb :Gblame<CR>
-noremap <silent> <leader>gs :Gstatus<CR>:res 10<CR>
+noremap <silent> <leader>gs :Git<CR>:res 10<CR>
 noremap <leader>xm :delmarks A-Za-z0-9<CR>
 noremap <silent> <M-q> :bw<cr>
 noremap <silent> <leader>ntf :NERDTreeFind<CR>
