@@ -19,6 +19,7 @@ call plug#end()
 
 " ---------- Core
 
+set mouse=
 set hidden
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
@@ -61,7 +62,8 @@ let g:coc_global_extensions = [
 
 " ---------- Gruvbox
 
-let g:gruvbox_contrast_dark='dark'
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='hard'
 let g:gruvbox_italicize_strings='1'
 let g:gruvbox_italicize_comments='1'
 
@@ -137,9 +139,12 @@ noremap <silent> <leader>rg :Rg<CR>
 noremap <silent> <leader>gf :GFiles<CR>
 noremap <silent> <M-g> :GFiles<CR>
 noremap <silent> <leader>gg :GGrep<CR>
-noremap <silent> <leader>gc :BCommits<CR>
+noremap <silent> <leader>gh :BCommits<CR>
 noremap <silent> <leader>gb :Gblame<CR>
 noremap <silent> <leader>gs :Git<CR>:res 10<CR>
+noremap <silent> <leader>gd :Gdiff<CR>
+noremap <silent> <leader>gb :Git blame<CR>
+noremap <silent> <leader>gc :Git commit<CR>
 noremap <leader>xm :delmarks A-Za-z0-9<CR>
 noremap <silent> <M-q> :bw<cr>
 noremap <silent> <leader>ntf :NERDTreeFind<CR>
