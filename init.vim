@@ -14,6 +14,7 @@ Plug 'cespare/vim-toml'
 Plug 'elixir-editors/vim-elixir'
 Plug 'tpope/vim-endwise'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'OmniSharp/omnisharp-vim'
 
 call plug#end()
 
@@ -48,16 +49,17 @@ autocmd FileType elixir let @i = 'a |> IO.inspect(label: "----->>>>>")'
 
 " ---------- COC
 let g:coc_global_extensions = [
+						\ 'coc-clangd',
 						\ 'coc-json',
 						\ 'coc-git',
 						\ 'coc-elixir',
-						\ 'coc-rls',
 						\ 'coc-sql',
 						\ 'coc-rome',
 						\ 'coc-sh',
 						\ 'coc-xml',
 						\ 'coc-yaml',
 						\ 'coc-python',
+                        \ 'coc-rust-analyzer',
 						\ ]
 
 " ---------- Gruvbox
@@ -146,7 +148,7 @@ noremap <silent> <leader>gd :Gdiff<CR>
 noremap <silent> <leader>gb :Git blame<CR>
 noremap <silent> <leader>gc :Git commit<CR>
 noremap <leader>xm :delmarks A-Za-z0-9<CR>
-noremap <silent> <M-q> :bw<cr>
+noremap <silent> <M-q> :bw<CR>
 noremap <silent> <leader>ntf :NERDTreeFind<CR>
 
 " ---------- Coc Key Mappings
@@ -176,16 +178,15 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Tab Completion in coc-nvim
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"
+inoremap <silent><expr> <cr> "\<c-g>u\<CR>"
+
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Strip trailing whitespace on save.
 autocmd BufWritePre * :%s/\s\+$//e

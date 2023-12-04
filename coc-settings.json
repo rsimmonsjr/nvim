@@ -1,3 +1,4 @@
 {
-  "elixir.pathToElixirLS": "~/dev/elixir-ls/release/language_server.sh"
+	"elixir.pathToElixirLS": "~/dev/elixir-ls/release/language_server.sh",
+	"suggest.noselect": true
 }
