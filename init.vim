@@ -7,7 +7,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'cespare/vim-toml'
@@ -15,6 +15,7 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'tpope/vim-endwise'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'OmniSharp/omnisharp-vim'
+Plug 'wsdjeg/vim-fetch', {'tag': 'v3.0.0'}
 
 call plug#end()
 
@@ -31,8 +32,10 @@ colo gruvbox
 highlight Comment cterm=italic
 highlight link SpecialComment GruvboxFg4
 set spellcapcheck=0
-:set clipboard=unnamedplus "yank, etc always to register +
-set diffopt=vertical "prefer vertical split in diffs
+" yank, etc always to register +
+" set clipboard=unnamedplus
+" prefer vertical split in diffs
+set diffopt=vertical
 set signcolumn=yes
 
 " Stop it from auto-inserting. Now <C-n> to complete and <Enter> to select.
@@ -74,6 +77,8 @@ let g:gruvbox_italicize_comments='1'
 let NERDTreeShowHidden=1
 
 " ---------- FZF
+let g:fzf_vim = {}
+let g:fzf_vim.preview_window = ['hidden,right,50%', 'ctrl-/']
 
 let g:fzf_layout = { 'down': '~25%' }
 
@@ -94,16 +99,10 @@ let g:fzf_colors =
       \ 'spinner': ['fg', 'Label'],
       \ 'header':  ['fg', 'Comment'] }
 
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   { 'dir': systemlist('git rev-parse --show-toplevel')[0] }, <bang>0)
-
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   fzf#vim#with_preview('hidden,right:50%', 'ctrl-/'),
   \   <bang>0)
 
 command! -bang -nargs=? -complete=dir Files
@@ -122,25 +121,24 @@ noremap <silent> <M->> <C-w>5><CR>
 noremap <silent> <M-=> <C-w>5+<CR>
 noremap <silent> <M-<> <C-w>5<<CR>
 noremap <silent> <F4> :set hlsearch! hlsearch?<CR>
-noremap <silent> <M-h> :noh<CR>
-noremap <silent> <leader>se :setlocal spell spelllang=en_us<CR>
-noremap <silent> <leader>sd :set nospell<CR>
-noremap <silent> <leader>ss :split<CR>
-noremap <silent> <leader>vv :vsplit<CR>
+noremap <silent> <M-c> :noh<CR>
 noremap <silent> <M-t> :NERDTreeToggle<CR>
+noremap <silent> <M-n> :NERDTreeFind<CR>
+noremap <silent> <M-h> :History:<CR>
 noremap <silent> <M-m> :Marks<CR>
 noremap <silent> <M-b> :Buffers<CR>
 noremap <silent> <M-l> :BLines<CR>
 noremap <silent> <M-k> :Maps<CR>
-noremap <silent> <leader>nf :NERDTreeFind<CR>
-noremap <silent> <M-n> :NERDTreeFind<CR>
-" noremap <silent> <leader>ff :Files<CR>
-noremap <silent> <M-f> :Files<CR>
-noremap <silent> <leader>rg :Rg<CR>
-" noremap <silent> <leader>gb :Gblame<CR>
-noremap <silent> <leader>gf :GFiles<CR>
 noremap <silent> <M-g> :GFiles<CR>
-noremap <silent> <leader>gg :GGrep<CR>
+noremap <silent> <M-r> :Rg<CR>
+noremap <silent> <M-f> :Files<CR>
+noremap <silent> <M-q> :bw<CR>
+noremap <leader>rg :Rg<Space>
+noremap <silent> <leader>se :setlocal spell spelllang=en_us<CR>
+noremap <silent> <leader>sd :set nospell<CR>
+noremap <silent> <leader>ss :split<CR>
+noremap <silent> <leader>vv :vsplit<CR>
+noremap <silent> <leader>gf :GFiles<CR>
 noremap <silent> <leader>gh :BCommits<CR>
 noremap <silent> <leader>gb :Gblame<CR>
 noremap <silent> <leader>gs :Git<CR>:res 10<CR>
@@ -148,8 +146,6 @@ noremap <silent> <leader>gd :Gdiff<CR>
 noremap <silent> <leader>gb :Git blame<CR>
 noremap <silent> <leader>gc :Git commit<CR>
 noremap <leader>xm :delmarks A-Za-z0-9<CR>
-noremap <silent> <M-q> :bw<CR>
-noremap <silent> <leader>ntf :NERDTreeFind<CR>
 
 " ---------- Coc Key Mappings
 
